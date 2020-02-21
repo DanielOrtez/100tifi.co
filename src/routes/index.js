@@ -7,9 +7,8 @@ import getHash from '../utils/getHash'
 import resolveRoutes from '../utils/resolveRoutes'
 
 const routes = {
-  '/': Home(),
-  '/:id': Character(),
-  '*': Error404()
+  '/': Home,
+  '/:id': Character
 }
 
 const router = async () => {
@@ -22,7 +21,7 @@ const router = async () => {
   const route = await resolveRoutes(hash)
   const render = routes[route] ? routes[route] : Error404
 
-  content.innerHTML = await render
+  content.innerHTML = await render()
 
   return {
     header,
